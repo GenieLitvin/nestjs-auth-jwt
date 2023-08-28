@@ -1,7 +1,7 @@
-import { Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { GoogleAuthGuard } from './utils/google-auth.guard';
 import { LocalAuthGuard } from './utils/local-auth.guard';
-
+import { Request } from 'express';
 @Controller('auth')
 export class AuthController {
   @Get('google')
@@ -14,6 +14,16 @@ export class AuthController {
   @UseGuards(GoogleAuthGuard)
   handleGoogleRedirect() {
     return { msg: 'Google OK' };
+  }
+
+  @Get('status')
+  user(@Req() request: Request) {
+    if (request.user) {
+      console.log('Auth');
+    } else {
+      console.log('un auth');
+    }
+    return;
   }
 
   @Post('local')
