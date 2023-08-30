@@ -1,7 +1,7 @@
 import { PassportSerializer } from '@nestjs/passport';
 import { AuthService } from '../auth.service';
 import { Inject, Injectable } from '@nestjs/common';
-import { UserDto } from 'src/users/user-dto';
+//import { UserDto } from 'src/users/user.local-dto';
 
 @Injectable()
 export class SessionSerializer extends PassportSerializer {
@@ -10,13 +10,13 @@ export class SessionSerializer extends PassportSerializer {
   ) {
     super();
   }
-  serializeUser(user: UserDto, done: Function) {
-    console.log(user);
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  serializeUser(user: any, done: Function) {
     done(null, user);
   }
+  // eslint-disable-next-line @typescript-eslint/ban-types
   async deserializeUser(payload: any, done: Function) {
     const user = this.authService.findUser(payload.id);
-    console.log(user);
     return user ? done(null, user) : done(null, null);
   }
 }
