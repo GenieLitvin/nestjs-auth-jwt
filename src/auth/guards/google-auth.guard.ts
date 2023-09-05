@@ -9,12 +9,4 @@ export class GoogleAuthGuard extends AuthGuard('google') {
     await super.logIn(request);
     return activate;
   }
-
-  /*handleRequest(err, user, info) {
-    // You can throw an exception based on either "info" or "err" arguments
-    if (err || !user) {
-      throw err || new UnauthorizedException();
-    }
-    return user;
-  }*/
 }

@@ -13,4 +13,7 @@ export class User {
 
   @Column({ nullable: true })
   displayname: string;
+
+  @Column({ nullable: true })
+  refreshToken: string;
 }
