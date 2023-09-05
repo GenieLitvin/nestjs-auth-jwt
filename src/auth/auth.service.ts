@@ -1,4 +1,8 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  BadRequestException,
+  ForbiddenException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from 'src/users/user.entity';
@@ -109,6 +113,21 @@ export class AuthService {
 
   async signInUser(user: any) {
     console.log('signInUser', user);
+    const tokens = await this.getTokens(user.id, user.username);
+    await this.updateRefreshToken(user.id, tokens.refreshToken);
+    return tokens;
+  }
+
+  async refreshTokens(id: number, refreshToken: string) {
+    const user = await this.userRepository.findOneBy({ id });
+    if (!user || !user.refreshToken)
+      throw new ForbiddenException('Access Denied');
+
+    const refreshTokenMatches = await bcrypt.compare(
+      user.refreshToken,
+      refreshToken,
+    );
+    if (!refreshTokenMatches) throw new ForbiddenException('Access Denied');
     const tokens = await this.getTokens(user.id, user.username);
     await this.updateRefreshToken(user.id, tokens.refreshToken);
     return tokens;

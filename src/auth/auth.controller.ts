@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { UserLocalDto } from 'src/users/user.local-dto';
 import { GithubAuthGuard } from './guards/github-auth.guard';
 import { AccessTokenGuard } from './guards/accessToken.guard';
+import { RefreshTokenGuard } from './guards/refreshToken.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -64,5 +65,12 @@ export class AuthController {
       console.log('un auth');
     }
     return;
+  }
+  @UseGuards(RefreshTokenGuard)
+  @Get('refresh')
+  refreshTokens(@Req() req: Request) {
+    const userId = req.user['sub'];
+    const refreshToken = req.user['refreshToken'];
+    return this.authService.refreshTokens(userId, refreshToken);
   }
 }
