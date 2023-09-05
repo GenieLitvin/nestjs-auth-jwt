@@ -23,8 +23,6 @@ export class AuthService {
     if (user) return user;
     console.log('user creted', details);
     const newUser = this.userRepository.create(details);
-    //const tokens = await this.getTokens(newUser.id, newUser.username);
-    //await this.updateRefreshToken(newUser.id, tokens.refreshToken);
     return this.userRepository.save(newUser);
   }
 
@@ -108,6 +106,7 @@ export class AuthService {
   async logout(userId: string) {
     return this.userRepository.update(userId, { refreshToken: null });
   }
+
   async signInUser(user: any) {
     console.log('signInUser', user);
     const tokens = await this.getTokens(user.id, user.username);

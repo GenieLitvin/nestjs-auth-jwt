@@ -41,7 +41,6 @@ export class AuthController {
   @Post('signup')
   async handleSignUP(@Body() userLocalDto: UserLocalDto) {
     return await this.authService.signUpUser(userLocalDto);
-    //return { msg: 'Local Auth' };
   }
 
   @UseGuards(AccessTokenGuard)
@@ -66,9 +65,4 @@ export class AuthController {
     }
     return;
   }
-  /*@Get('local/redirect')
-  @UseGuards(AccessTokenGuard)
-  handleLocalRedirect() {
-    return { msg: 'Local OK' };
-  }*/
 }
