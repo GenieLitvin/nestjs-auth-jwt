@@ -22,9 +22,19 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+## Overview
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
+This is an example of how to implement sotial (google, github), local authentications in NestJs using passport.js, and JWTs (accesss and refresh tokens). The application also utilizes Docker for containerization.
+## Features
+
+- **JWT Authentication**: token-based authentication in a Nest.js app using JWT.
+
+- **Social Authentication**: Google and GitHub autentification
+
+- **TypeORM Integration**: using the  MySQL Relational DBMS
+
+- **Docker Integration**
 
 ## Installation
 
@@ -58,23 +68,3 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-
-### Build image
-docker build -t mysql-container .
-
-### Run container
-docker run -d -p 3306:3306 --name mysql-instance mysql-container
-
-Nest is [MIT licensed](LICENSE).
